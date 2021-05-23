@@ -101,6 +101,7 @@ resource "helm_release" "helm-traefik" {
   version    = "9.19.1"
   namespace  = "ingress-controllers"
   values     = [file("./helm_values/traefik/values.yaml")]
+  depends_on = [kubectl_manifest.my_namespaces]
 }
 
 
