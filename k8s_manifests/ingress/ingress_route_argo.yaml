@@ -1,0 +1,17 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argo-route  
+  labels:
+    app: traefik
+  namespace: argocd
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`argo.justpipeline.com`)
+    kind: Rule
+    services:
+      - name: argocd-server
+        port: 80
+  

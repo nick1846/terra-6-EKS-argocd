@@ -45,9 +45,27 @@ resource "kubectl_manifest" "my_ingress" {
   count     = length(data.kubectl_path_documents.ingress.documents)
   yaml_body = element(data.kubectl_path_documents.ingress.documents, count.index)
 
-  depends_on = [ helm_release.helm-traefik, helm_release.helm-aws-ingress, helm_release.helm-ext-dns ]
+  depends_on = [
+    helm_release.helm-traefik,
+    helm_release.helm-aws-ingress,
+    helm_release.helm-ext-dns,
+    kubectl_manifest.my_argocd
+  ]
 }
 
 
+################################
+#Apply .yaml manifests from ./k8s_manifests/deployments/argocd
+
+data "kubectl_path_documents" "argocd" {
+  pattern = "./k8s_manifests/deployments/argocd/*.yaml"
+}
+
+resource "kubectl_manifest" "my_argocd" {
+  count              = length(data.kubectl_path_documents.argocd.documents)
+  yaml_body          = element(data.kubectl_path_documents.argocd.documents, count.index)
+  override_namespace = "argocd"
+  depends_on         = [kubectl_manifest.my_namespaces]
+}
 
 

@@ -13,7 +13,7 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-port: '9000'
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/target-type: ip
-    external-dns.alpha.kubernetes.io/hostname: traefik.justpipeline.com        
+    external-dns.alpha.kubernetes.io/hostname: traefik.justpipeline.com, argo.justpipeline.com        
   labels:
     app: traefik
 spec:  

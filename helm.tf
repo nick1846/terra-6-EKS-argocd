@@ -10,7 +10,6 @@ provider "helm" {
   }
 }
 
-
 #Install AWS load balancer contriller with helm chart
 
 resource "helm_release" "helm-aws-ingress" {
@@ -90,7 +89,6 @@ resource "helm_release" "helm-ext-dns" {
     value = "noop"
   }
 }
-
 
 #Install Traefik controller with helm
 
