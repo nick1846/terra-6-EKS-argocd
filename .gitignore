@@ -3,4 +3,4 @@
 
 # Crash log files
 crash.log
-kubeconfig_my-cluster
+kubeconfig*
