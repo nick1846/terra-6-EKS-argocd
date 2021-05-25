@@ -18,6 +18,7 @@ data "kubectl_path_documents" "namespaces" {
 resource "kubectl_manifest" "my_namespaces" {
   count     = length(data.kubectl_path_documents.namespaces.documents)
   yaml_body = element(data.kubectl_path_documents.namespaces.documents, count.index)
+  depends_on = [ module.my_eks ]
 }
 
 ################################
